@@ -1,0 +1,29 @@
+// Copyright (c) 2024 Droid Robot, Inc.  All rights reserved.
+//
+// Downloading, reproducing, distributing or otherwise using the SDK Software
+// is subject to the terms and conditions of the Droid Robot Software
+// Development Kit License (20240808-DRSDK-SL).
+
+syntax = "proto3";
+
+package droidgrpc;
+
+option java_outer_classname = "LegServiceProto";
+
+import "droid_msg.proto";
+
+service LegService {
+    // Get robot config information
+    rpc GetLegConfig(Empty) returns (DroidConfigs);
+
+    // Get robot state information (such as kinematic state, power state, or faults).
+    rpc GetLegState(Empty) returns (DroidStateResponse) {}
+    // Lightweight Streaming version of RobotState
+    rpc GetLegStateStream(Empty) returns (stream DroidStateResponse) {}
+    // Command updates for joint control
+    rpc SetLegCommand(DroidCommandRequest) returns (Empty) {}
+    // Command updates for joint control
+    rpc SetLegCommandStream(stream DroidCommandRequest) returns (Empty) {}
+    // Robot State and Command updates for robot control
+    rpc ExchangeLegControlStream(stream DroidCommandRequest) returns (stream DroidStateResponse) {}
+}
