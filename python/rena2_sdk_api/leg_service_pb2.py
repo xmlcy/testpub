@@ -12,7 +12,7 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
-from . import droid_msg_pb2 as droid__msg__pb2
+import droid_msg_pb2 as droid__msg__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11leg_service.proto\x12\tdroidgrpc\x1a\x0f\x64roid_msg.proto2\xc6\x03\n\nLegService\x12\x39\n\x0cGetLegConfig\x12\x10.droidgrpc.Empty\x1a\x17.droidgrpc.DroidConfigs\x12@\n\x0bGetLegState\x12\x10.droidgrpc.Empty\x1a\x1d.droidgrpc.DroidStateResponse\"\x00\x12H\n\x11GetLegStateStream\x12\x10.droidgrpc.Empty\x1a\x1d.droidgrpc.DroidStateResponse\"\x00\x30\x01\x12\x43\n\rSetLegCommand\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x10.droidgrpc.Empty\"\x00\x12K\n\x13SetLegCommandStream\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x10.droidgrpc.Empty\"\x00(\x01\x12_\n\x18\x45xchangeLegControlStream\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x1d.droidgrpc.DroidStateResponse\"\x00(\x01\x30\x01\x42\x11\x42\x0fLegServiceProtob\x06proto3')

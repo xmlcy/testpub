@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from . import droid_msg_pb2 as droid__msg__pb2
+import droid_msg_pb2 as droid__msg__pb2
 
 GRPC_GENERATED_VERSION = '1.65.4'
 GRPC_VERSION = grpc.__version__

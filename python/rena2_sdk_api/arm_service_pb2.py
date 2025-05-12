@@ -12,7 +12,7 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
-from . import droid_msg_pb2 as droid__msg__pb2
+import droid_msg_pb2 as droid__msg__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x61rm_service.proto\x12\tdroidgrpc\x1a\x0f\x64roid_msg.proto2\xc0\x03\n\nArmService\x12\x39\n\x0cGetArmConfig\x12\x10.droidgrpc.Empty\x1a\x17.droidgrpc.DroidConfigs\x12>\n\x0bGetArmState\x12\x10.droidgrpc.Empty\x1a\x1b.droidgrpc.DroidArmResponse\"\x00\x12\x46\n\x11GetArmStateStream\x12\x10.droidgrpc.Empty\x1a\x1b.droidgrpc.DroidArmResponse\"\x00\x30\x01\x12\x43\n\rSetArmCommand\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x10.droidgrpc.Empty\"\x00\x12K\n\x13SetArmCommandStream\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x10.droidgrpc.Empty\"\x00(\x01\x12]\n\x18\x45xchangeArmControlStream\x12\x1e.droidgrpc.DroidCommandRequest\x1a\x1b.droidgrpc.DroidArmResponse\"\x00(\x01\x30\x01\x42\x11\x42\x0f\x41rmServiceProtob\x06proto3')
