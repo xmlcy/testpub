@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "part.proto";
+
+package reachy.part.mobile.base.mobility;
+
+// Speed commands in SI units (m/s and rad/s)
+message DirectionVector {
+    // use FloatValue instead of double to avoid 0.0 default value being ignored
+    google.protobuf.FloatValue x = 1;
+    google.protobuf.FloatValue y = 2;
+    google.protobuf.FloatValue theta = 3;
+}
+
+message TargetDirectionCommand {
+    reachy.part.PartId id = 1;
+    DirectionVector direction = 2;
+}
+
+message SetSpeedVector {
+    reachy.part.PartId id = 1;
+
+    google.protobuf.FloatValue x_vel = 2;
+    google.protobuf.FloatValue y_vel = 3;
+    google.protobuf.FloatValue rot_vel = 4;
+    google.protobuf.FloatValue duration = 5;
+}
+
+message DistanceToGoalVector {
+    google.protobuf.FloatValue delta_x = 1;
+    google.protobuf.FloatValue delta_y = 2;
+    google.protobuf.FloatValue delta_theta = 3;
+    google.protobuf.FloatValue distance = 4;
+}
+
+message MobilityServiceAck {
+    google.protobuf.BoolValue success = 1;
+}
+
+service MobileBaseMobilityService {
+    rpc SendDirection(TargetDirectionCommand) returns (MobilityServiceAck);
+    rpc SendSetSpeed(SetSpeedVector) returns (MobilityServiceAck);
+
+    rpc GetLastDirection(reachy.part.PartId) returns (DirectionVector);
+    rpc DistanceToGoal(reachy.part.PartId) returns (DistanceToGoalVector);
+}

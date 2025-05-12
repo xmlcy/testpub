@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "error.proto";
+import "kinematics.proto";
+
+package component.video;
+
+enum View {
+    LEFT = 0;
+    RIGHT = 1;
+    DEPTH = 2;
+}
+
+message VideoAck {
+    google.protobuf.BoolValue success = 1;
+    error.Error error = 2;
+}
+
+message CameraFeatures {
+    string name = 1;
+    bool stereo = 2;
+    bool depth = 3;
+}
+
+message CameraParameters {
+    uint32 height = 1;
+    uint32 width = 2;
+    string distortion_model = 3;
+    repeated float D = 4;
+    repeated float K = 5;
+    repeated float R = 6;
+    repeated float P = 7;
+}
+
+message CameraExtrinsics {
+    reachy.kinematics.Matrix4x4 extrinsics = 1;
+}
+
+message ListOfCameraFeatures {
+    repeated CameraFeatures camera_feat = 1;
+}
+
+message Frame {
+    google.protobuf.Timestamp timestamp = 1;
+    bytes data = 2;
+}
+
+message FrameRaw {
+    google.protobuf.Timestamp timestamp = 1;
+    bytes data = 2;
+    uint32 height = 3;
+    uint32 width = 4;
+    string encoding = 5;
+    uint32 step = 6;
+    bool isbigendian = 7;   
+}
+
+message ViewRequest {
+    CameraFeatures camera_feat = 1;
+    optional View view = 2;
+}
+
+service VideoService {
+    rpc GetAvailableCameras(google.protobuf.Empty) returns (ListOfCameraFeatures);
+    rpc GetFrame (ViewRequest) returns (Frame);
+    rpc GetParameters (ViewRequest) returns (CameraParameters);
+    rpc GetDepth (ViewRequest) returns (FrameRaw);
+    rpc GetExtrinsics (ViewRequest) returns (CameraExtrinsics);
+}
