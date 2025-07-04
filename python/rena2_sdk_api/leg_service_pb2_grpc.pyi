@@ -7,6 +7,7 @@ Downloading, reproducing, distributing or otherwise using the SDK Software
 is subject to the terms and conditions of the Droid Robot Software
 Development Kit License (20240808-DRSDK-SL).
 """
+
 import abc
 import collections.abc
 import droid_msg_pb2
@@ -14,12 +15,11 @@ import grpc
 import grpc.aio
 import typing
 
-_T = typing.TypeVar('_T')
+_T = typing.TypeVar("_T")
 
-class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta):
-    ...
+class _MaybeAsyncIterator(collections.abc.AsyncIterator[_T], collections.abc.Iterator[_T], metaclass=abc.ABCMeta): ...
 
-class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore
+class _ServicerContext(grpc.ServicerContext, grpc.aio.ServicerContext):  # type: ignore[misc, type-arg]
     ...
 
 class LegServiceStub:
@@ -29,26 +29,31 @@ class LegServiceStub:
         droid_msg_pb2.DroidConfigs,
     ]
     """Get robot config information"""
+
     GetLegState: grpc.UnaryUnaryMultiCallable[
         droid_msg_pb2.Empty,
         droid_msg_pb2.DroidStateResponse,
     ]
     """Get robot state information (such as kinematic state, power state, or faults)."""
+
     GetLegStateStream: grpc.UnaryStreamMultiCallable[
         droid_msg_pb2.Empty,
         droid_msg_pb2.DroidStateResponse,
     ]
     """Lightweight Streaming version of RobotState"""
+
     SetLegCommand: grpc.UnaryUnaryMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.Empty,
     ]
     """Command updates for joint control"""
+
     SetLegCommandStream: grpc.StreamUnaryMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.Empty,
     ]
     """Command updates for joint control"""
+
     ExchangeLegControlStream: grpc.StreamStreamMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.DroidStateResponse,
@@ -61,26 +66,31 @@ class LegServiceAsyncStub:
         droid_msg_pb2.DroidConfigs,
     ]
     """Get robot config information"""
+
     GetLegState: grpc.aio.UnaryUnaryMultiCallable[
         droid_msg_pb2.Empty,
         droid_msg_pb2.DroidStateResponse,
     ]
     """Get robot state information (such as kinematic state, power state, or faults)."""
+
     GetLegStateStream: grpc.aio.UnaryStreamMultiCallable[
         droid_msg_pb2.Empty,
         droid_msg_pb2.DroidStateResponse,
     ]
     """Lightweight Streaming version of RobotState"""
+
     SetLegCommand: grpc.aio.UnaryUnaryMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.Empty,
     ]
     """Command updates for joint control"""
+
     SetLegCommandStream: grpc.aio.StreamUnaryMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.Empty,
     ]
     """Command updates for joint control"""
+
     ExchangeLegControlStream: grpc.aio.StreamStreamMultiCallable[
         droid_msg_pb2.DroidCommandRequest,
         droid_msg_pb2.DroidStateResponse,
@@ -95,6 +105,7 @@ class LegServiceServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[droid_msg_pb2.DroidConfigs, collections.abc.Awaitable[droid_msg_pb2.DroidConfigs]]:
         """Get robot config information"""
+
     @abc.abstractmethod
     def GetLegState(
         self,
@@ -102,6 +113,7 @@ class LegServiceServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[droid_msg_pb2.DroidStateResponse, collections.abc.Awaitable[droid_msg_pb2.DroidStateResponse]]:
         """Get robot state information (such as kinematic state, power state, or faults)."""
+
     @abc.abstractmethod
     def GetLegStateStream(
         self,
@@ -109,6 +121,7 @@ class LegServiceServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[collections.abc.Iterator[droid_msg_pb2.DroidStateResponse], collections.abc.AsyncIterator[droid_msg_pb2.DroidStateResponse]]:
         """Lightweight Streaming version of RobotState"""
+
     @abc.abstractmethod
     def SetLegCommand(
         self,
@@ -116,6 +129,7 @@ class LegServiceServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[droid_msg_pb2.Empty, collections.abc.Awaitable[droid_msg_pb2.Empty]]:
         """Command updates for joint control"""
+
     @abc.abstractmethod
     def SetLegCommandStream(
         self,
@@ -123,6 +137,7 @@ class LegServiceServicer(metaclass=abc.ABCMeta):
         context: _ServicerContext,
     ) -> typing.Union[droid_msg_pb2.Empty, collections.abc.Awaitable[droid_msg_pb2.Empty]]:
         """Command updates for joint control"""
+
     @abc.abstractmethod
     def ExchangeLegControlStream(
         self,

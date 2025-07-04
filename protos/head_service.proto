@@ -1,0 +1,24 @@
+// Copyright (c) 2024 Droid Robot, Inc.  All rights reserved.
+//
+// Downloading, reproducing, distributing or otherwise using the SDK Software
+// is subject to the terms and conditions of the Droid Robot Software
+// Development Kit License (20240808-DRSDK-SL).
+
+syntax = "proto3";
+
+package headarkit;
+
+message Empty {}
+
+message HeadArkitMessage {
+    string servo_json = 1; 
+}
+
+// servo_json -- 示例 {"mouthUpperUpLeft":0.5,"mouthUpperUpRight":0.1...} 舵机参数
+
+service HeadArkitStream {
+    rpc SetHeadState (HeadArkitMessage) returns (Empty);
+    rpc GetHeadState (Empty) returns (HeadArkitMessage);
+}
+
+

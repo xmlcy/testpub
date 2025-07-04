@@ -11,3 +11,12 @@ Just install `pip install mypy-protobuf` to generate the mypy stubs, and run:
 ```python
 python -m grpc_tools.protoc -I./protos --python_out=./python/rena2_sdk_api --grpc_python_out=./python/rena2_sdk_api --mypy_out=./python/rena2_sdk_api --mypy_grpc_out=./python/rena2_sdk_api  ./protos/*.proto
 ```
+
+## Install rena2_sdk_api
+
+```shell
+cd python
+# pip install -e .
+pip install .
+```
+
