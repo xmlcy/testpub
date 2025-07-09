@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package mobilebase;
+
+// 移动底盘服务定义
+service MobileBaseService {
+  // 基本运动控制
+  rpc Move(MoveRequest) returns (MoveResponse) {}
+  
+  // 停止移动
+  rpc Stop(StopRequest) returns (StopResponse) {}
+  
+  // 获取底盘状态
+  rpc GetStatus(StatusRequest) returns (StatusResponse) {}
+  
+  // 移动到指定目标点位
+  rpc MoveToTarget(MoveToTargetRequest) returns (MoveToTargetResponse) {}
+}
+
+// 移动请求
+message MoveRequest {
+  // 线速度 (m/s)
+  float linear_velocity = 1;
+  
+  // 角速度 (rad/s)
+  float angular_velocity = 2;
+  
+  // 移动方向
+  enum Direction {
+    FORWARD = 0;  // 前进
+    BACKWARD = 1; // 后退
+    LEFT = 2;     // 左转
+    RIGHT = 3;    // 右转
+  }
+  Direction direction = 3;
+  
+  // 移动时间 (秒)，0表示持续移动直到收到停止命令
+  float duration = 4;
+}
+
+// 移动响应
+message MoveResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// 停止请求
+message StopRequest {
+  // 停止类型
+  enum StopType {
+    NORMAL = 0;  // 正常停止
+    EMERGENCY = 1; // 紧急停止
+  }
+  StopType type = 1;
+}
+
+// 停止响应
+message StopResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// 状态请求
+message StatusRequest {
+  // 空请求
+}
+
+// 状态响应
+message StatusResponse {
+  // 当前状态
+  enum State {
+    IDLE = 0;     // 空闲
+    MOVING = 1;    // 移动中
+    ERROR = 2;     // 错误
+  }
+  State state = 1;
+  
+  // 当前线速度 (m/s)
+  float current_linear_velocity = 2;
+  
+  // 当前角速度 (rad/s)
+  float current_angular_velocity = 3;
+  
+  // 电池电量百分比
+  float battery_percentage = 4;
+  
+  // 错误信息（如果有）
+  string error_message = 5;
+}
+
+// 移动到目标点位请求
+message MoveToTargetRequest {
+  // 目标点位名称
+  string target_name = 1;
+}
+
+// 移动到目标点位响应
+message MoveToTargetResponse {
+  bool success = 1;
+  string message = 2;
+}
