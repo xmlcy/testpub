@@ -7,7 +7,6 @@ Downloading, reproducing, distributing or otherwise using the SDK Software
 is subject to the terms and conditions of the Droid Robot Software
 Development Kit License (20240808-DRSDK-SL).
 """
-
 import google.protobuf.descriptor
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
